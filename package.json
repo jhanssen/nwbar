@@ -1,0 +1,17 @@
+{
+   "name": "nwbar",
+   "version": "1.0.0",
+   "description": "",
+   "main": "app/index.html",
+   "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "./node_modules/.bin/nw ."
+   },
+   "author": "",
+   "license": "MIT",
+   "dependencies": {
+      "@jhanssen/xprop": "^1.0.10",
+      "minimist": "^1.2.0",
+      "nw": "^0.25.0"
+   }
+}
