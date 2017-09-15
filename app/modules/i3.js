@@ -13,7 +13,6 @@ function reselect(opts)
 {
     const elems = opts.document.querySelectorAll("#workspace .element");
     elems.forEach(elem => {
-        console.log(elem.id, `workspace${workspaces.focused}`);
         if (elem.id == `workspace${workspaces.focused}`) {
             elem.classList.add("selected");
         } else {
