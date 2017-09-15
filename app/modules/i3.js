@@ -7,7 +7,7 @@ const workspaces = {
     elements: {}
 };
 
-let inner;
+let wselem;
 
 function reselect(opts)
 {
@@ -24,8 +24,8 @@ function reselect(opts)
 
 function recreate(opts)
 {
-    while (inner.firstChild) {
-        inner.removeChild(inner.firstChild);
+    while (wselem.firstChild) {
+        wselem.removeChild(wselem.firstChild);
     }
     for (let k in workspaces.elements) {
         const div = opts.document.createElement("div");
@@ -33,7 +33,7 @@ function recreate(opts)
         div.setAttribute("id", `workspace${k}`);
         div.innerHTML = workspaces.elements[k].name;
         console.log(workspaces.elements[k].name);
-        inner.appendChild(div);
+        wselem.appendChild(div);
     }
 }
 
@@ -44,19 +44,16 @@ function init(opts, config)
         position = opts.dom.position(config.position);
 
     //console.log("wanting to init time", opts);
-    const top = opts.document.createElement("div");
-    inner = opts.document.createElement("div");
-    inner.setAttribute("id", "workspace");
-
-    top.appendChild(inner);
+    wselem = opts.document.createElement("div");
+    wselem.setAttribute("id", "workspace");
 
     opts.dom.addCSS(
         "#workspace { display: flex; }",
-        "#workspace .element { padding-right: 5; padding-left: 5; margin-left: 1; background-color: #666; }",
+        "#workspace .element { padding-right: 5; padding-left: 5; margin-left: 2; background-color: #666; }",
         "#workspace .element.selected { background-color: #33D; font-weight: bold; }"
     );
 
-    opts.dom.addElement(position, top);
+    opts.dom.addElement(position, wselem);
 }
 
 module.exports = function(opts, config) {
