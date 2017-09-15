@@ -57,7 +57,7 @@ module.exports = function(opts, config) {
                 }
             }
         } else {
-            ifaceelem.innerHTML = "";
+            ifaceelem.innerHTML = `no such interface: ${iface.iface}`;
         }
     };
 
