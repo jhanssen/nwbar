@@ -4,7 +4,6 @@
 require("./consolehack")(console);
 
 const xprop = require("@jhanssen/xprop");
-const I3 = require("@jhanssen/i3");
 const minimist = require("minimist");
 const Configstore = require("configstore");
 
@@ -23,21 +22,21 @@ const dom = {
         document.getElementById(domNames[position]).appendChild(elem);
     },
 
-    addCSS: function(css) {
-        if (typeof css != "string" || !css.length)
+    addCSS: function(...css) {
+        if (!css.length || !css[0].length)
             return;
-        if (css[0] == '/' && css.indexOf("\n") == -1) {
+        if (css.length == 1 && css[0][0] == '/' && css[0].indexOf("\n") == -1) {
             // assume file
             const link = document.createElement("link");
             link.setAttribute("rel", "stylesheet");
             link.setAttribute("type", "text/css");
-            link.setAttribute("href", css);
+            link.setAttribute("href", css[0]);
             document.getElementsByTagName("head")[0].appendChild(link);
         } else {
             // assume css text
             const style = document.createElement("style");
             style.type = "text/css";
-            style.innerHTML = css;
+            style.innerHTML = css.join(" ");
             document.getElementsByTagName("head")[0].appendChild(style);
         }
     },
@@ -78,25 +77,16 @@ function go() {
         nw.Window.get().showDevTools();
     }
 
-    const i3 = new I3();
-    i3.open().then(() => {
-        // i3.on("workspace", (w) => {
-        //     //document.write(JSON.stringify(Object.keys(client)));
-        // });
-        // i3.send("
-        const modules = conf.get("modules");
-        if (Array.isArray(modules)) {
-            for (let i = 0; i < modules.length; ++i) {
-                loadModule(modules[i], { i3: i3, dom: dom, document: document });
-            }
-        } else if (typeof modules == "object" || typeof modules == "string") {
-            loadModule(modules, { i3: i3, dom: dom, document: document });
-        } else {
-            throw "No modules";
+    const modules = conf.get("modules");
+    if (Array.isArray(modules)) {
+        for (let i = 0; i < modules.length; ++i) {
+            loadModule(modules[i], { dom: dom, document: document });
         }
-    }).catch(e => {
-        console.error(e);
-    });
+    } else if (typeof modules == "object" || typeof modules == "string") {
+        loadModule(modules, { dom: dom, document: document });
+    } else {
+        throw "No modules";
+    }
 
     //document.write(w + " " + h + " " + JSON.stringify(args));
 

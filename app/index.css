@@ -6,7 +6,7 @@ body {
     font-size: 10pt;
     overflow: hidden;
     font-family: Monaco;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 div#main {
