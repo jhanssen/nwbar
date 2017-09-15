@@ -46,8 +46,8 @@ function init(opts, config)
     wselem.setAttribute("id", "workspace");
 
     opts.dom.addCSS(
-        "#workspace { display: flex; }",
-        "#workspace .element { padding-right: 5; padding-left: 5; margin-left: 2; background-color: #666; }",
+        "#workspace { display: flex; margin-top: 1; }",
+        "#workspace .element { padding-right: 5; padding-left: 5; margin-left: 2; background-color: #444; }",
         "#workspace .element.selected { background-color: #33D; font-weight: bold; }"
     );
 
