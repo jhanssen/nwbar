@@ -31,7 +31,6 @@ function recreate(opts)
         div.setAttribute("class", "element");
         div.setAttribute("id", `workspace${k}`);
         div.innerHTML = workspaces.elements[k].name;
-        console.log(workspaces.elements[k].name);
         wselem.appendChild(div);
     }
 }
@@ -61,9 +60,9 @@ module.exports = function(opts, config) {
     init(opts, config);
 
     i3.open().then(() => {
-        console.log("open");
+        // console.log("open");
         i3.on("workspace", ws => {
-            console.log("ws event", ws);
+            // console.log("ws event", ws);
             const wss = ws.current;
             switch (ws.change) {
             case "init":
