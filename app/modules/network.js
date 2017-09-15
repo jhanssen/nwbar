@@ -13,10 +13,10 @@ function guessInterface()
                 break;
             const sub = data[n];
             if (!foundv4 && sub.family == "IPv4") {
-                if (!sub.internal && sub.address.length > 0 && sub.address != "127.0.0.1")
+                if (!sub.internal && sub.address.length > 0)
                     foundv4 = iface;
             } else if (!foundv6 && sub.family == "IPv6") {
-                if (!sub.internal && sub.address.length > 0 && sub.address != "::1")
+                if (!sub.internal && sub.address.length > 0)
                     foundv6 = iface;
             }
         }
