@@ -19,8 +19,8 @@ const dom = {
     CENTER: 1,
     RIGHT: 2,
 
-    addElement: function(where, elem) {
-        document.getElementById(domNames[where]).appendChild(elem);
+    addElement: function(position, elem) {
+        document.getElementById(domNames[position]).appendChild(elem);
     },
 
     addCSS: function(css) {
@@ -40,6 +40,16 @@ const dom = {
             style.innerHTML = css;
             document.getElementsByTagName("head")[0].appendChild(style);
         }
+    },
+
+    position: function(w) {
+        switch (w) {
+        case "center":
+            return dom.CENTER;
+        case "right":
+            return dom.RIGHT;
+        }
+        return dom.LEFT;
     }
 };
 
@@ -48,10 +58,10 @@ function loadModule(module, opts)
     try {
         if (typeof module == "object") {
             const mod = require(module.path);
-            mod(opts, module.config);
+            mod(opts, module.config || {});
         } else {
             const mod = require(module);
-            mod(opts);
+            mod(opts, {});
         }
     } catch (e) {
         console.error(`Can't load module ${module}`);
