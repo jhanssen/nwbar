@@ -7,10 +7,16 @@
       "test": "echo \"Error: no test specified\" && exit 1",
       "start": "./node_modules/.bin/nw ."
    },
-   "author": "",
+   "author": {
+      "name": "Jan Erik Hanssen",
+      "email": "jhanssen@gmail.com"
+   },
    "license": "MIT",
    "dependencies": {
-      "@jhanssen/xprop": "^1.0.10",
+      "@jhanssen/i3": "^1.0.1",
+      "@jhanssen/xprop": "^1.0.11",
+      "configstore": "^3.1.1",
+      "dateformat": "^2.0.0",
       "minimist": "^1.2.0",
       "nw": "^0.25.0"
    }
