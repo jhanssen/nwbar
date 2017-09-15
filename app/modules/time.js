@@ -23,4 +23,6 @@ module.exports = function(opts, config) {
     setInterval(() => {
         time.innerHTML = dateformat(new Date(), format);
     }, update);
+
+    time.innerHTML = dateformat(new Date(), format);
 };
