@@ -49,6 +49,16 @@ const dom = {
             return dom.RIGHT;
         }
         return dom.LEFT;
+    },
+
+    ready: function(e) {
+        e.classList.remove("error");
+        e.classList.add("ready");
+    },
+
+    error: function(e) {
+        e.classList.remove("ready");
+        e.classList.add("error");
     }
 };
 

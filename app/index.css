@@ -30,3 +30,11 @@ div#right {
     flex-grow: 2;
     justify-content: flex-end;
 }
+
+.error {
+    color: #d33;
+}
+
+.ready {
+    color: #3d3;
+}

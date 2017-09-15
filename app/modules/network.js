@@ -38,7 +38,7 @@ module.exports = function(opts, config) {
 
     const top = opts.document.createElement("div");
     top.setAttribute("id", "network");
-    opts.dom.addCSS("#network { margin-left: 5; margin-right: 5; margin-top: 1; margin-bottom: 1; color: #3d3 }");
+    opts.dom.addCSS("#network { margin-left: 5; margin-right: 5; margin-top: 1; margin-bottom: 1; }");
     const ifaceelem = opts.document.createElement("div");
     top.appendChild(ifaceelem);
 
@@ -47,6 +47,7 @@ module.exports = function(opts, config) {
     const updateIface = () => {
         const ifaces = os.networkInterfaces();
         if (iface.iface in ifaces) {
+            opts.dom.ready(ifaceelem);
             const data = ifaces[iface.iface];
             for (let n = 0; n < data.length; ++n) {
                 const sub = data[n];
@@ -58,6 +59,7 @@ module.exports = function(opts, config) {
             }
         } else {
             ifaceelem.innerHTML = `no such interface: ${iface.iface}`;
+            opts.dom.error(ifaceelem);
         }
     };
 
