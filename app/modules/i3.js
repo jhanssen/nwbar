@@ -47,7 +47,7 @@ function init(opts, config)
 
     opts.dom.addCSS(
         "#workspace { display: flex; margin-top: 1; }",
-        "#workspace .element { padding-right: 5; padding-left: 5; margin-left: 2; background-color: #444; }",
+        "#workspace .element { padding-right: 5; padding-left: 5; margin-left: 2; background-color: #444; border: 1px solid #777; }",
         "#workspace .element.selected { background-color: #33D; font-weight: bold; }"
     );
 
