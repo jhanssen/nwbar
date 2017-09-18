@@ -7,8 +7,6 @@ const workspaces = {
     elements: {}
 };
 
-let wselem;
-
 function reselect(opts)
 {
     const elems = opts.document.querySelectorAll("#workspace .element");
@@ -23,6 +21,7 @@ function reselect(opts)
 
 function recreate(opts)
 {
+    let wselem = opts.document.getElementById("workspace");
     while (wselem.firstChild) {
         wselem.removeChild(wselem.firstChild);
     }
@@ -37,12 +36,14 @@ function recreate(opts)
 
 function init(opts, config)
 {
+    let pos = config.positions || {};
+
     let position = opts.dom.RIGHT;
-    if (typeof config.position == "string")
-        position = opts.dom.position(config.position);
+    if (typeof pos.workspace == "string")
+        position = opts.dom.position(pos.workspace);
 
     //console.log("wanting to init time", opts);
-    wselem = opts.document.createElement("div");
+    let wselem = opts.document.createElement("div");
     wselem.setAttribute("id", "workspace");
 
     opts.dom.addCSS(
@@ -52,6 +53,15 @@ function init(opts, config)
     );
 
     opts.dom.addElement(position, wselem);
+
+    let titleelem = opts.document.createElement("div");
+    titleelem.setAttribute("id", "workspaceTitle");
+
+    position = opts.dom.CENTER;
+    if (typeof pos.title == "string")
+        position = opts.dom.position(pos.title);
+
+    opts.dom.addElement(position, titleelem);
 }
 
 module.exports = function(opts, config) {
@@ -79,6 +89,13 @@ module.exports = function(opts, config) {
                 break;
             }
             reselect(opts);
+        });
+        i3.on("window", win => {
+            //console.log("window", win);
+            if (win.change === "focus") {
+                let titleelem = opts.document.getElementById("workspaceTitle");
+                titleelem.innerHTML = win.container.name;
+            }
         });
         i3.send("GET_WORKSPACES").then(ws => {
             //console.log("all ws", ws);
